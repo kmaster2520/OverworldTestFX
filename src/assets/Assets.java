@@ -3,11 +3,14 @@ package assets;
 import map.SpriteSheet;
 import map.TileMap;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * Created by Sathvik on 11/27/17.
+ *
+ * A list of Assets in one class for easy access.
  */
 public class Assets {
 
@@ -18,6 +21,10 @@ public class Assets {
      * Initializes assets
      */
     public static void init() {
+        spriteSheets = new HashMap<>();
+        tileMaps = new HashMap<>();
+
+        spriteSheets.put("fantasy", new SpriteSheet("fantasy", 32, 32));
 
     }
 

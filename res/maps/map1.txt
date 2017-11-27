@@ -1,5 +1,5 @@
-fantasy-tileset
-Map1
+Test Map 1
+fantasy
 xxxxxxxx
 x......x
 x......x
