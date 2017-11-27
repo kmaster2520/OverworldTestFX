@@ -1,0 +1,7 @@
+fantasy-tileset
+Map1
+xxxxxxxx
+x......x
+x......x
+x......x
+xxxxxxxx
