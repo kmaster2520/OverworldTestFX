@@ -7,6 +7,8 @@ import java.io.IOException;
 
 /**
  * Created by Sathvik on 11/27/17.
+ *
+ * Can read integers (BufferedReader alone can't)
  */
 public class TextFileReader extends BufferedReader {
 
@@ -14,6 +16,11 @@ public class TextFileReader extends BufferedReader {
         super(new FileReader(file));
     }
 
+    /**
+     * Reads an integer (character after int is also read and discarded)
+     * @return int value
+     * @throws IOException
+     */
     public int readInt() throws IOException {
         int value = 0;
         char c = (char) read();
