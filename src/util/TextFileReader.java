@@ -26,6 +26,7 @@ public class TextFileReader extends BufferedReader {
         char c = (char) read();
         while (c >= '0' && c <= '9') {
             value = value * 10 + (c - '0');
+            c = (char) read();
         }
         return value;
     }

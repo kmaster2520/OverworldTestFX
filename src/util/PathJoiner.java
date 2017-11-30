@@ -21,19 +21,17 @@ public class PathJoiner {
      * @return file with given path
      */
     public static File getFile(String first, String... args) {
-        Path fileLoc = Paths.get(first, args);
-        return fileLoc.toFile();
+        return Paths.get(first, args).toFile();
     }
 
     /**
-     * creates path from compents
+     * creates path from components
      * @param first root resource directory
      * @param args file path components
      * @return path
      */
     public static Path getPath(String first, String... args) {
-        Path fileLoc = Paths.get(first, args);
-        return fileLoc;
+        return Paths.get(first, args);
     }
 
 }

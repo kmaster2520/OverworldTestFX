@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,7 +24,7 @@ public class SpriteSheet {
     private String name;
     private BufferedImage image;
 
-    private Map<Character, Tile> charConversions;
+    private Map<Character, BufferedImage> charConversions;
 
     /**
      * Creates Spritesheet with name and tile size
@@ -36,6 +37,7 @@ public class SpriteSheet {
         this.tileSizeW = tileSizeW;
         this.tileSizeH = tileSizeH;
 
+        // read spritesheet
         File file = PathJoiner.getFile("res", "spritesheets", name + ".png");
         //System.out.println(file.toString());
         try {
@@ -44,15 +46,23 @@ public class SpriteSheet {
             System.out.println("File not found: " + file.toString());
         }
 
+        // get conversions from chars to tile images
         File convertFile = PathJoiner.getFile("res", "spritesheetconversions", name + ".txt");
+        charConversions = new HashMap<>();
         try {
             TextFileReader fr = new TextFileReader(convertFile);
             char ch = (char) fr.read();
-            while (ch > 0) {
+            fr.read(); // read empty space after char
+            while (ch > 0 && ch < 128) {
+                System.out.println(ch);
                 int r = fr.readInt();
                 int c = fr.readInt();
+                System.out.println(r + " " + c);
                 BufferedImage tileImg = getTileAt(r, c);
-                charConversions.put(ch, new Tile(tileImg, tileSizeW, tileSizeW, false));
+                charConversions.put(ch, tileImg); // map char to tile image
+                //
+                ch = (char) fr.read();
+                fr.read();
             }
             fr.close();
         } catch (IOException e) {
@@ -68,6 +78,7 @@ public class SpriteSheet {
      * @return tile image at a given row and column
      */
     public BufferedImage getTileAt(int r, int c) {
+
         return image.getSubimage(c * tileSizeW, r * tileSizeH, tileSizeW, tileSizeH);
     }
 
@@ -76,7 +87,15 @@ public class SpriteSheet {
      * @param c the character to convert
      * @return image
      */
-    public Tile getImageForChar(char c) {
+    public BufferedImage getImageForChar(char c) {
         return charConversions.get(c);
+    }
+
+    public int getTileSizeW() {
+        return tileSizeW;
+    }
+
+    public int getTileSizeH() {
+        return tileSizeH;
     }
 }

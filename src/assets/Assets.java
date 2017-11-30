@@ -23,9 +23,26 @@ public class Assets {
     public static void init() {
         spriteSheets = new HashMap<>();
         tileMaps = new HashMap<>();
+        //
+        System.out.println("initializing assets");
+        initSpriteSheets();
+        initTileMaps();
+    }
 
+    /**
+     * Initialize Spritesheets
+     */
+    private static void initSpriteSheets() {
+        System.out.println("initializing spritesheets");
         spriteSheets.put("fantasy", new SpriteSheet("fantasy", 32, 32));
+    }
 
+    /**
+     * Initialize Tilemaps
+     */
+    private static void initTileMaps() {
+        System.out.println("initializing tilemaps");
+        tileMaps.put("map1", new TileMap("map1"));
     }
 
     /**

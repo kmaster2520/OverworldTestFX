@@ -2,6 +2,7 @@ package util;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -33,5 +34,9 @@ public class ImageLoader {
      */
     public static Image toFXImage(BufferedImage image) {
         return SwingFXUtils.toFXImage(image, null);
+    }
+
+    public static ImageView toImageView(BufferedImage image) {
+        return new ImageView(toFXImage(image));
     }
 }
