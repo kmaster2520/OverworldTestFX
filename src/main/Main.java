@@ -49,9 +49,22 @@ public class Main extends Application {
         Assets.init();
         System.out.println("done asset init");
 
+        // initialize game state manager
         gsm = new GameStateManager();
-        gsm.push(new MainState(gsm));
+        gsm.push(new MainState(gsm, "map1"));
 
+        // set key listeners
+        scene.setOnKeyPressed(event -> {
+            gsm.current().handleKeyPress(event);
+        });
+        scene.setOnKeyReleased(event -> {
+            gsm.current().handleKeyRelease(event);
+        });
+        scene.setOnKeyTyped(event -> {
+            gsm.current().handleKeyTyped(event);
+        });
+
+        // initialize frame timer
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {

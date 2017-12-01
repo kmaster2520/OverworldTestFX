@@ -1,8 +1,12 @@
 package assets;
 
+import javafx.scene.image.Image;
 import map.SpriteSheet;
 import map.TileMap;
+import util.ImageLoader;
+import util.PathJoiner;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +21,8 @@ public class Assets {
     private static Map<String, SpriteSheet> spriteSheets;
     private static Map<String, TileMap> tileMaps;
 
+    public static Image playerImage;
+
     /**
      * Initializes assets
      */
@@ -27,6 +33,11 @@ public class Assets {
         System.out.println("initializing assets");
         initSpriteSheets();
         initTileMaps();
+
+        try {
+            playerImage = ImageLoader.loadFXImage(PathJoiner.getFile("res", "sprites", "player.png"));
+        } catch (IOException e) {}
+
     }
 
     /**

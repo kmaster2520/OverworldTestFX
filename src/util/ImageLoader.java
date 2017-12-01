@@ -27,6 +27,10 @@ public class ImageLoader {
         return ImageIO.read(file);
     }
 
+    public static Image loadFXImage(File file) throws IOException {
+        return toFXImage(loadImage(file));
+    }
+
     /**
      * Converts buffered image to an FX image
      * @param image the buffered image to be converted

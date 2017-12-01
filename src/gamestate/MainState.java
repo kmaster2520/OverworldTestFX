@@ -2,11 +2,14 @@ package gamestate;
 
 
 import assets.Assets;
+import entity.Player;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import main.GameStateManager;
+import map.TileMap;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,10 +26,13 @@ public class MainState implements GameState {
     private Text text;
     private List<ImageView> tiles;
 
+    private Player player;
+
+    private TileMap tileMap;
     private long lastSec;
     private int frameCount;
 
-    public MainState(GameStateManager gsm) {
+    public MainState(GameStateManager gsm, String mapName) {
         this.gsm = gsm;
         nodes = new HashSet<>();
 
@@ -36,8 +42,14 @@ public class MainState implements GameState {
         text.setTranslateY(400);
         nodes.add(text);
 
-        tiles = Assets.tileMap("map1").getTileViews();
+        tileMap = Assets.tileMap(mapName);
+        tiles = tileMap.getTileViews(5, 5);
         nodes.addAll(tiles);
+
+        player = new Player(Assets.playerImage, 500, 500);
+        nodes.add(player);
+
+
     }
 
     @Override
@@ -49,6 +61,32 @@ public class MainState implements GameState {
         } else {
             frameCount++;
         }
+    }
+
+    @Override
+    public void handleKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+            case W:
+                player.shiftY(-player.getSpeed());
+                break;
+            case S:
+                player.shiftY(player.getSpeed());
+                break;
+            case A:
+                player.shiftX(-player.getSpeed());
+                break;
+            case D:
+                player.shiftX(player.getSpeed());
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    @Override
+    public void handleKeyRelease(KeyEvent event) {
+
     }
 
     @Override

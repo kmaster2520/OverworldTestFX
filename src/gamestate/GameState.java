@@ -3,6 +3,7 @@ package gamestate;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.input.KeyEvent;
 
 import java.util.Set;
 
@@ -16,6 +17,12 @@ public interface GameState {
      * @param now current timestamp in nanoseconds
      */
     public void tick(long now);
+
+    default public void handleKeyPress(KeyEvent event) {}
+
+    default public void handleKeyRelease(KeyEvent event) {}
+
+    default public void handleKeyTyped(KeyEvent event) {}
 
     /**
      *

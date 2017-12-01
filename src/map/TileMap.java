@@ -88,4 +88,16 @@ public class TileMap {
         return tileViews;
     }
 
+    public List<ImageView> getTileViews(int offsetX, int offsetY) {
+        List<ImageView> tileViews = new ArrayList<>();
+        for (Point p : tiles.keySet()) {
+            Tile tile = tiles.get(p);
+            ImageView imageView = ImageLoader.toImageView(tile.getImage());
+            imageView.setTranslateX(tile.getX() + offsetX * tile.getWidth());
+            imageView.setTranslateY(tile.getY() + offsetY * tile.getHeight());
+            tileViews.add(imageView);
+        }
+        return tileViews;
+    }
+
 }
