@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -28,6 +29,6 @@ public interface GameState {
      *
      * @return nodes of current game state
      */
-    public Set<Node> getNodes();
+    public Collection<Node> getNodes();
 
 }

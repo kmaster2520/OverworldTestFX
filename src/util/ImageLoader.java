@@ -27,6 +27,12 @@ public class ImageLoader {
         return ImageIO.read(file);
     }
 
+    /**
+     * Loads image from a file location and converts into an FX image
+     * @param file
+     * @return the fx image at the file location
+     * @throws IOException if image cannot be loaded properly
+     */
     public static Image loadFXImage(File file) throws IOException {
         return toFXImage(loadImage(file));
     }
@@ -40,6 +46,11 @@ public class ImageLoader {
         return SwingFXUtils.toFXImage(image, null);
     }
 
+    /**
+     * Converts buffered image to an ImageView
+     * @param image the buffered image to be converted
+     * @return ImageView
+     */
     public static ImageView toImageView(BufferedImage image) {
         return new ImageView(toFXImage(image));
     }

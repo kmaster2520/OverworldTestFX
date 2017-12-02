@@ -10,10 +10,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import main.GameStateManager;
 import map.TileMap;
+import util.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Sathvik on 11/30/17.
@@ -27,14 +26,17 @@ public class MainState implements GameState {
     private List<ImageView> tiles;
 
     private Player player;
+    private static double playerSpeed = 2;
 
     private TileMap tileMap;
     private long lastSec;
     private int frameCount;
 
+    private boolean playerUp, playerDown, playerLeft, playerRight;
+
     public MainState(GameStateManager gsm, String mapName) {
         this.gsm = gsm;
-        nodes = new HashSet<>();
+        nodes = new TreeSet<>(Comparators.zComparator);
 
         text = new Text("FPS: " + frameCount);
         text.setFill(Color.GREEN);
@@ -44,11 +46,19 @@ public class MainState implements GameState {
 
         tileMap = Assets.tileMap(mapName);
         tiles = tileMap.getTileViews(5, 5);
+        for (ImageView iv : tiles) {
+            iv.setTranslateZ(0);
+        }
         nodes.addAll(tiles);
 
         player = new Player(Assets.playerImage, 500, 500);
+        player.setTranslateZ(1);
         nodes.add(player);
 
+        playerUp = false;
+        playerDown = false;
+        playerLeft = false;
+        playerRight = false;
 
     }
 
@@ -61,22 +71,36 @@ public class MainState implements GameState {
         } else {
             frameCount++;
         }
+        //
+        if (playerUp)
+            player.shiftY(-playerSpeed);
+        if (playerDown)
+            player.shiftY(playerSpeed);
+        if (playerLeft)
+            player.shiftX(-playerSpeed);
+        if (playerRight)
+            player.shiftX(playerSpeed);
+
     }
 
     @Override
     public void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
             case W:
-                player.shiftY(-player.getSpeed());
+                playerUp = true;
+                playerDown = false;
                 break;
             case S:
-                player.shiftY(player.getSpeed());
+                playerUp = false;
+                playerDown = true;
                 break;
             case A:
-                player.shiftX(-player.getSpeed());
+                playerLeft = true;
+                playerRight = false;
                 break;
             case D:
-                player.shiftX(player.getSpeed());
+                playerLeft = false;
+                playerRight = true;
                 break;
             default:
                 break;
@@ -86,7 +110,22 @@ public class MainState implements GameState {
 
     @Override
     public void handleKeyRelease(KeyEvent event) {
-
+        switch (event.getCode()) {
+            case W:
+                playerUp = false;
+                break;
+            case S:
+                playerDown = false;
+                break;
+            case A:
+                playerLeft = false;
+                break;
+            case D:
+                playerRight = false;
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
