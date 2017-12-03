@@ -42,17 +42,18 @@ public class MainState implements GameState {
         text.setFill(Color.GREEN);
         text.setTranslateX(400);
         text.setTranslateY(400);
+        text.setTranslateZ(10);
         nodes.add(text);
 
         tileMap = Assets.tileMap(mapName);
-        tiles = tileMap.getTileViews(5, 5);
+        tiles = tileMap.getTileViews(0, 0);
         for (ImageView iv : tiles) {
             iv.setTranslateZ(0);
         }
         nodes.addAll(tiles);
 
         player = new Player(Assets.playerImage, 500, 500);
-        player.setTranslateZ(1);
+        player.setTranslateZ(5);
         nodes.add(player);
 
         playerUp = false;

@@ -54,6 +54,8 @@ public class Assets {
     private static void initTileMaps() {
         System.out.println("initializing tilemaps");
         tileMaps.put("map1", new TileMap("map1"));
+        tileMaps.put("map2", new TileMap("map2"));
+        tileMaps.put("map3", new TileMap("map3"));
     }
 
     /**

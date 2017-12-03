@@ -26,7 +26,6 @@ public interface GameState {
     default public void handleKeyTyped(KeyEvent event) {}
 
     /**
-     *
      * @return nodes of current game state
      */
     public Collection<Node> getNodes();

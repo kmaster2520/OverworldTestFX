@@ -15,13 +15,18 @@ public class Comparators {
     public static Comparator<Node> zComparator = new Comparator<Node>() {
         @Override
         public int compare(Node o1, Node o2) {
+
+            // compare z coordinates
             double c = o1.getTranslateZ() - o2.getTranslateZ();
             if (c > 0.0001) {
                 return 1;
             }
             if (c < 0.0001) {
                 return -1;
-            } else {
+            }
+
+            // if z coordinates are equal, then use hashcode to break tie
+            else {
                 return o1.hashCode() - o2.hashCode();
             }
         }

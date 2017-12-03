@@ -45,7 +45,7 @@ public class TileMap {
             int y = 0;
             char ch = (char) fr.read();
             while (ch > 0 && ch < 128) {
-                System.out.print(ch);
+                //System.out.print(ch);
                 x++;
                 if (ch == '\n') {
                     y++;
@@ -67,7 +67,7 @@ public class TileMap {
             }
 
             fr.close();
-            System.out.println();
+            //System.out.println();
 
 
 

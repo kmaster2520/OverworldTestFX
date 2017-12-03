@@ -14,8 +14,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private double screenWidth = 800;
-    private double screenHeight = 600;
+    private double screenWidth = 800; // 25 tiles
+    private double screenHeight = 640; // 20 tiles
 
     // frame control fields
     private AnimationTimer timer; // game loop
@@ -51,7 +51,7 @@ public class Main extends Application {
 
         // initialize game state manager
         gsm = new GameStateManager();
-        gsm.push(new MainState(gsm, "map1"));
+        gsm.push(new MainState(gsm, "map3"));
 
         // set key listeners
         scene.setOnKeyPressed(event -> {
